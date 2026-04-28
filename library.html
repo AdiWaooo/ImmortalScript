@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Library — Immortal Scriptures</title>
+    <meta name="description" content="View your saved books, reading progress, finished titles, and bookmarks in the Immortal Scriptures Library.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="library.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="library.js" defer></script>
+</head>
+
+<body>
+    <input type="checkbox" id="theme-switch" style="display: none;">
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="LOGO.png" alt="Immortal Scriptures Library Logo" class="logo">
+                <h1 class="logo-text">My Library</h1>
+            </div>
+
+            <nav class="nav-menu" role="tablist">
+                <a href="#lib-reading" class="nav-item active" role="tab" aria-selected="true" id="tab-reading">
+                    <i class="ph ph-book-open"></i>
+                    <span>Currently Reading</span>
+                </a>
+                <a href="#lib-finished" class="nav-item" role="tab" aria-selected="false" id="tab-finished">
+                    <i class="ph ph-check-circle"></i>
+                    <span>Finished</span>
+                </a>
+                <a href="#lib-bookmarks" class="nav-item" role="tab" aria-selected="false" id="tab-bookmarks">
+                    <i class="ph ph-bookmark-simple"></i>
+                    <span>Bookmarks</span>
+                </a>
+                <a href="#lib-wishlist" class="nav-item" role="tab" aria-selected="false" id="tab-wishlist">
+                    <i class="ph ph-heart"></i>
+                    <span>Wishlist</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <a href="index.html" class="nav-item back-btn" title="Back to Dashboard">
+                    <i class="ph ph-arrow-left"></i>
+                    <span>Dashboard</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="top-header">
+                <div class="lib-header-left">
+                    <h2 class="lib-page-title">My Library</h2>
+                    <span class="lib-subtitle">All your saved scriptures in one place</span>
+                </div>
+                <div class="user-actions">
+                    <label for="theme-switch" class="icon-btn theme-toggle-btn" title="Toggle Theme" style="cursor:pointer;" aria-label="Toggle Theme">
+                        <i class="ph ph-sun"></i>
+                    </label>
+                    <div class="lib-stats-chips">
+                        <span class="stats-chip"><i class="ph ph-books"></i> 4 Saved</span>
+                        <span class="stats-chip completed-chip"><i class="ph ph-check-circle"></i> 1 Done</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Currently Reading View -->
+            <div id="lib-reading" class="lib-view active">
+                <section class="content-section">
+                    <div class="section-header">
+                        <h2>Currently Reading</h2>
+                        <span class="lib-count">3 books</span>
+                    </div>
+
+                    <!-- Reading Grid -->
+                    <div class="books-grid lib-books-grid">
+                        <!-- Book 1 -->
+                        <div class="book-card lib-book-card">
+                            <div class="book-cover">
+                                <img src="DD.jpg" alt="Divine Dao">
+                                <div class="book-overlay">
+                                    <button class="read-btn">Continue Reading</button>
+                                </div>
+                            </div>
+                            <div class="book-info">
+                                <h3>Divine Dao (Douluo Dalu)</h3>
+                                <p class="lib-genre">Xianxia · Fantasy</p>
+                                <p class="lib-chapter">Chapter 145 / 336</p>
+                            </div>
+                            <div class="lib-progress-section">
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 45%;"></div>
+                                </div>
+                                <span class="progress-label">45%</span>
+                            </div>
+                            <div class="lib-card-actions">
+                                <button class="lib-action-btn" title="Bookmark"><i class="ph ph-bookmark-simple"></i></button>
+                                <button class="lib-action-btn remove-btn" title="Remove"><i class="ph ph-trash"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Book 2 -->
+                        <div class="book-card lib-book-card">
+                            <div class="book-cover">
+                                <img src="SL.jpg" alt="Shadow Lord">
+                                <div class="book-overlay">
+                                    <button class="read-btn">Continue Reading</button>
+                                </div>
+                            </div>
+                            <div class="book-info">
+                                <h3>Shadow Lord</h3>
+                                <p class="lib-genre">Action · Dark Fantasy</p>
+                                <p class="lib-chapter">Chapter 12 / 620</p>
+                            </div>
+                            <div class="lib-progress-section">
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 5%;"></div>
+                                </div>
+                                <span class="progress-label">5%</span>
+                            </div>
+                            <div class="lib-card-actions">
+                                <button class="lib-action-btn" title="Bookmark"><i class="ph ph-bookmark-simple"></i></button>
+                                <button class="lib-action-btn remove-btn" title="Remove"><i class="ph ph-trash"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Book 3 -->
+                        <div class="book-card lib-book-card">
+                            <div class="book-cover">
+                                <img src="STH.jpg" alt="Stairway to Heaven">
+                                <div class="book-overlay">
+                                    <button class="read-btn">Continue Reading</button>
+                                </div>
+                            </div>
+                            <div class="book-info">
+                                <h3>Stairway to Heaven</h3>
+                                <p class="lib-genre">Wuxia · Martial Arts</p>
+                                <p class="lib-chapter">Chapter 88 / 1822</p>
+                            </div>
+                            <div class="lib-progress-section">
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 30%;"></div>
+                                </div>
+                                <span class="progress-label">30%</span>
+                            </div>
+                            <div class="lib-card-actions">
+                                <button class="lib-action-btn" title="Bookmark"><i class="ph ph-bookmark-simple"></i></button>
+                                <button class="lib-action-btn remove-btn" title="Remove"><i class="ph ph-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Finished View -->
+            <div id="lib-finished" class="lib-view">
+                <section class="content-section">
+                    <div class="section-header">
+                        <h2>Finished Books</h2>
+                        <span class="lib-count">1 book</span>
+                    </div>
+
+                    <div class="books-grid lib-books-grid">
+                        <div class="book-card lib-book-card">
+                            <div class="book-cover">
+                                <img src="MP.jpg" alt="Martial Peak">
+                                <div class="book-overlay">
+                                    <button class="read-btn">Read Again</button>
+                                </div>
+                                <div class="completed-badge">Completed</div>
+                            </div>
+                            <div class="book-info">
+                                <h3>Martial Peak</h3>
+                                <p class="lib-genre">Xianxia · Cultivation</p>
+                                <p class="lib-chapter">Chapter 6008 (End)</p>
+                            </div>
+                            <div class="lib-progress-section">
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 100%;"></div>
+                                </div>
+                                <span class="progress-label">100%</span>
+                            </div>
+                            <div class="lib-card-actions">
+                                <button class="lib-action-btn" title="Bookmark"><i class="ph ph-star"></i></button>
+                                <button class="lib-action-btn remove-btn" title="Remove"><i class="ph ph-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Bookmarks View -->
+            <div id="lib-bookmarks" class="lib-view">
+                <section class="content-section">
+                    <div class="section-header">
+                        <h2>Bookmarked Chapters</h2>
+                        <span class="lib-count">2 bookmarks</span>
+                    </div>
+
+                    <div class="bookmark-list">
+                        <div class="bookmark-item">
+                            <div class="bookmark-cover">
+                                <img src="DD.jpg" alt="Divine Dao">
+                            </div>
+                            <div class="bookmark-info">
+                                <h4>Divine Dao (Douluo Dalu)</h4>
+                                <p>Chapter 102 — The Final Duel</p>
+                                <span class="bookmark-date"><i class="ph ph-clock"></i> Saved 2 days ago</span>
+                            </div>
+                            <div class="bookmark-actions">
+                                <button class="read-btn bookmark-read-btn">Read Now</button>
+                                <button class="lib-action-btn remove-btn" title="Remove"><i class="ph ph-trash"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="bookmark-item">
+                            <div class="bookmark-cover">
+                                <img src="STH.jpg" alt="Stairway to Heaven">
+                            </div>
+                            <div class="bookmark-info">
+                                <h4>Stairway to Heaven</h4>
+                                <p>Chapter 55 — The Heavenly Trial</p>
+                                <span class="bookmark-date"><i class="ph ph-clock"></i> Saved 5 days ago</span>
+                            </div>
+                            <div class="bookmark-actions">
+                                <button class="read-btn bookmark-read-btn">Read Now</button>
+                                <button class="lib-action-btn remove-btn" title="Remove"><i class="ph ph-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Wishlist View -->
+            <div id="lib-wishlist" class="lib-view">
+                <section class="content-section">
+                    <div class="section-header">
+                        <h2>Wishlist</h2>
+                        <span class="lib-count">3 books</span>
+                    </div>
+
+                    <div class="books-grid lib-books-grid">
+                        <div class="book-card lib-book-card wishlist-card">
+                            <div class="book-cover">
+                                <img src="PW.jpg" alt="Perfect World">
+                                <div class="book-overlay">
+                                    <button class="read-btn">Start Reading</button>
+                                </div>
+                                <div class="wishlist-badge"><i class="ph ph-heart-fill"></i></div>
+                            </div>
+                            <div class="book-info">
+                                <h3>Perfect World</h3>
+                                <p class="lib-genre">Xianxia</p>
+                            </div>
+                            <div class="lib-card-actions" style="margin-top: auto; padding-top: 12px;">
+                                <button class="lib-action-btn add-lib-btn" title="Add to Reading List"><i class="ph ph-plus-circle"></i> Add to Library</button>
+                                <button class="lib-action-btn remove-btn" title="Remove from Wishlist"><i class="ph ph-trash"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="book-card lib-book-card wishlist-card">
+                            <div class="book-cover">
+                                <img src="BTH.jpg" alt="Battle Through the Heavens">
+                                <div class="book-overlay">
+                                    <button class="read-btn">Start Reading</button>
+                                </div>
+                                <div class="wishlist-badge"><i class="ph ph-heart-fill"></i></div>
+                            </div>
+                            <div class="book-info">
+                                <h3>Battle Through the Heavens</h3>
+                                <p class="lib-genre">Fantasy · Martial Arts</p>
+                            </div>
+                            <div class="lib-card-actions" style="margin-top: auto; padding-top: 12px;">
+                                <button class="lib-action-btn add-lib-btn" title="Add to Reading List"><i class="ph ph-plus-circle"></i> Add to Library</button>
+                                <button class="lib-action-btn remove-btn" title="Remove from Wishlist"><i class="ph ph-trash"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="book-card lib-book-card wishlist-card">
+                            <div class="book-cover">
+                                <img src="A.jpg" alt="Apotheosis">
+                                <div class="book-overlay">
+                                    <button class="read-btn">Start Reading</button>
+                                </div>
+                                <div class="wishlist-badge"><i class="ph ph-heart-fill"></i></div>
+                            </div>
+                            <div class="book-info">
+                                <h3>Apotheosis</h3>
+                                <p class="lib-genre">Action · Adventure</p>
+                            </div>
+                            <div class="lib-card-actions" style="margin-top: auto; padding-top: 12px;">
+                                <button class="lib-action-btn add-lib-btn" title="Add to Reading List"><i class="ph ph-plus-circle"></i> Add to Library</button>
+                                <button class="lib-action-btn remove-btn" title="Remove from Wishlist"><i class="ph ph-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Account Modal (shared) -->
+    <div id="accountModal" class="modal-overlay">
+        <div class="modal-content">
+            <a href="#" class="close-btn" style="text-decoration:none;">&times;</a>
+            <h2>Create Account</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="usernameInput" style="display:none;">Username</label>
+                    <input type="text" id="usernameInput" placeholder="Username" required>
+                </div>
+                <div class="form-group">
+                    <label for="emailInput" style="display:none;">Email</label>
+                    <input type="email" id="emailInput" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <label for="passwordInput" style="display:none;">Password</label>
+                    <input type="password" id="passwordInput" placeholder="Password" required>
+                </div>
+                <a href="#" class="btn-primary" style="display:block; text-align:center; text-decoration:none;">Register</a>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

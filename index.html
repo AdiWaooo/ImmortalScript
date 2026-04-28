@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Immortal Scriptures — Dashboard</title>
+    <meta name="description" content="Immortal Scriptures Library — your personal reading dashboard.">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <input type="checkbox" id="theme-switch" style="display:none;">
+    <div class="dashboard-container">
+
+        <!-- ===================== SIDEBAR ===================== -->
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="LOGO.png" alt="Immortal Scriptures Library Logo" class="logo">
+                <h1 class="logo-text">Immortal Scriptures</h1>
+            </div>
+
+            <nav class="nav-menu" role="tablist">
+                <a href="#view-dashboard" class="nav-item active" role="tab" aria-selected="true">
+                    <i class="ph ph-squares-four"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#view-library" class="nav-item" role="tab" aria-selected="false">
+                    <i class="ph ph-books"></i>
+                    <span>My Library</span>
+                </a>
+                <a href="#view-explore" class="nav-item" role="tab" aria-selected="false">
+                    <i class="ph ph-compass"></i>
+                    <span>Explore</span>
+                </a>
+                <a href="#view-bookmarks" class="nav-item" role="tab" aria-selected="false">
+                    <i class="ph ph-bookmark-simple"></i>
+                    <span>Bookmarks</span>
+                </a>
+                <a href="#view-history" class="nav-item" role="tab" aria-selected="false">
+                    <i class="ph ph-clock-counter-clockwise"></i>
+                    <span>History</span>
+                </a>
+                <a href="#view-rankings" class="nav-item" role="tab" aria-selected="false">
+                    <i class="ph ph-trend-up"></i>
+                    <span>Rankings</span>
+                </a>
+                <a href="#view-authors" class="nav-item" role="tab" aria-selected="false">
+                    <i class="ph ph-users"></i>
+                    <span>Authors</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <a href="#accountModal" class="nav-item settings-btn">
+                    <i class="ph ph-gear"></i>
+                    <span>Settings</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- ===================== MAIN CONTENT ===================== -->
+        <main class="main-content">
+
+            <!-- Header -->
+            <header class="top-header">
+                <button class="mobile-menu-btn" aria-label="Toggle mobile menu" style="background:none;border:none;cursor:pointer;color:inherit;">
+                    <i class="ph ph-list"></i>
+                </button>
+                <div class="search-bar">
+                    <i class="ph ph-magnifying-glass"></i>
+                    <input type="text" placeholder="Search scriptures, manuals, and novels...">
+                </div>
+                <div class="user-actions">
+                    <label for="theme-switch" class="icon-btn theme-toggle-btn" title="Toggle Theme" style="cursor:pointer;" aria-label="Toggle Theme">
+                        <i class="ph ph-sun"></i>
+                    </label>
+                    <button class="icon-btn notification-btn" aria-label="Notifications">
+                        <i class="ph ph-bell"></i>
+                        <span class="badge">3</span>
+                    </button>
+                    <a href="#accountModal" class="user-profile profile-btn" style="text-decoration:none;" aria-label="User Profile">
+                        <div class="avatar"><i class="ph ph-user"></i></div>
+                    </a>
+                </div>
+            </header>
+
+            <!-- Announcement Banner -->
+            <div class="announcement-banner">
+                <div class="announcement-icon"><i class="ph ph-megaphone"></i></div>
+                <div class="announcement-content">
+                    <strong>System Update:</strong> Version 2.4.0 is live! We've added new repositories for faster
+                    loading times and introduced the new Rankings layout natively.
+                </div>
+                <button class="announcement-link" style="background:transparent;border:none;cursor:pointer;font-family:inherit;">Dismiss</button>
+            </div>
+
+            <!-- ===== VIEW: DASHBOARD (default) ===== -->
+            <div id="view-dashboard" class="view active">
+                <section class="stats-section">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <h3>Favorite Genres</h3>
+                            <i class="ph ph-pie-chart"></i>
+                        </div>
+                        <div class="chart-container" style="position:relative;height:200px;padding:8px 0;">
+                            <canvas id="genreChart" aria-label="Favorite Genres Pie Chart" role="img"></canvas>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <h3>Book Reading Time (Hours)</h3>
+                            <i class="ph ph-chart-bar"></i>
+                        </div>
+                        <div class="chart-container" style="position:relative;height:200px;padding:8px 0;">
+                            <canvas id="readingTimeChart" aria-label="Weekly Reading Time Bar Chart" role="img"></canvas>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-section">
+                    <div class="section-header">
+                        <h2>Quick Access</h2>
+                    </div>
+                    <div class="quick-access-grid">
+                        <a href="#view-library" class="quick-card nav-item-link" id="quick-library" data-view="view-library">
+                            <div class="quick-card-icon"><i class="ph ph-books"></i></div>
+                            <div class="quick-card-info">
+                                <h3>My Library</h3>
+                                <p>4 books saved &middot; 1 completed</p>
+                            </div>
+                            <i class="ph ph-arrow-right quick-card-arrow"></i>
+                        </a>
+                        <a href="#view-explore" class="quick-card nav-item-link" data-view="view-explore">
+                            <div class="quick-card-icon"><i class="ph ph-compass"></i></div>
+                            <div class="quick-card-info">
+                                <h3>Explore</h3>
+                                <p>Discover new titles</p>
+                            </div>
+                            <i class="ph ph-arrow-right quick-card-arrow"></i>
+                        </a>
+                        <a href="#view-bookmarks" class="quick-card nav-item-link" data-view="view-bookmarks">
+                            <div class="quick-card-icon"><i class="ph ph-bookmark-simple"></i></div>
+                            <div class="quick-card-info">
+                                <h3>Bookmarks</h3>
+                                <p>Your saved chapters</p>
+                            </div>
+                            <i class="ph ph-arrow-right quick-card-arrow"></i>
+                        </a>
+                        <a href="#view-history" class="quick-card nav-item-link" data-view="view-history">
+                            <div class="quick-card-icon"><i class="ph ph-clock-counter-clockwise"></i></div>
+                            <div class="quick-card-info">
+                                <h3>History</h3>
+                                <p>Recent reading activity</p>
+                            </div>
+                            <i class="ph ph-arrow-right quick-card-arrow"></i>
+                        </a>
+                    </div>
+                </section>
+            </div>
+
+            <!-- ===== VIEW: MY LIBRARY ===== -->
+            <div id="view-library" class="view">
+                <section class="content-section">
+                    <div class="recent-read-layout">
+                        <!-- Left: Currently Reading -->
+                        <div class="recent-read-main">
+                            <div class="section-header">
+                                <h2>Currently Reading</h2>
+                                <a href="#" class="view-all">View All</a>
+                            </div>
+                            <div class="books-grid">
+                                <div class="book-card">
+                                    <div class="book-cover">
+                                        <img src="DD.jpg" alt="Divine Dao">
+                                        <div class="book-overlay"><button class="read-btn">Continue Reading</button></div>
+                                    </div>
+                                    <div class="book-info">
+                                        <h3>Divine Dao (Douluo Dalu)</h3>
+                                        <p>Chapter 145/336</p>
+                                    </div>
+                                    <div class="progress-bar"><div class="progress" style="width:45%"></div></div>
+                                </div>
+                                <div class="book-card">
+                                    <div class="book-cover">
+                                        <img src="SL.jpg" alt="Shadow Lord">
+                                        <div class="book-overlay"><button class="read-btn">Continue Reading</button></div>
+                                    </div>
+                                    <div class="book-info">
+                                        <h3>Shadow Lord</h3>
+                                        <p>Chapter 12/620</p>
+                                    </div>
+                                    <div class="progress-bar"><div class="progress" style="width:5%"></div></div>
+                                </div>
+                                <div class="book-card">
+                                    <div class="book-cover">
+                                        <img src="STH.jpg" alt="Stairway to Heaven">
+                                        <div class="book-overlay"><button class="read-btn">Continue Reading</button></div>
+                                    </div>
+                                    <div class="book-info">
+                                        <h3>Stairway to Heaven</h3>
+                                        <p>Chapter 88/1822</p>
+                                    </div>
+                                    <div class="progress-bar"><div class="progress" style="width:30%"></div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right: Similar Recommendations -->
+                        <div class="recent-read-aside">
+                            <div class="section-header"><h2>Similar to Recent</h2></div>
+                            <div class="similar-books-list">
+                                <a href="#view-explore" class="similar-book nav-item-link" data-view="view-explore" style="text-decoration:none;">
+                                    <div class="similar-cover"><img src="PW.jpg" alt="Perfect World"></div>
+                                    <div class="similar-info"><h4>Perfect World</h4><p>If you liked Divine Dao</p></div>
+                                </a>
+                                <a href="#view-explore" class="similar-book nav-item-link" data-view="view-explore" style="text-decoration:none;">
+                                    <div class="similar-cover"><img src="BTH.jpg" alt="Battle Through the Heavens"></div>
+                                    <div class="similar-info"><h4>Battle Through Heavens</h4><p>If you liked Divine Dao</p></div>
+                                </a>
+                                <a href="#view-explore" class="similar-book nav-item-link" data-view="view-explore" style="text-decoration:none;">
+                                    <div class="similar-cover"><img src="A.jpg" alt="Apotheosis"></div>
+                                    <div class="similar-info"><h4>Apotheosis</h4><p>If you liked Shadow Lord</p></div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Finished Books -->
+                    <div class="section-header" style="margin-top:48px;">
+                        <h2>Finished Books</h2>
+                        <a href="#" class="view-all">View All</a>
+                    </div>
+                    <div class="books-grid">
+                        <div class="book-card">
+                            <div class="book-cover">
+                                <img src="MP.jpg" alt="Martial Peak">
+                                <div class="book-overlay"><button class="read-btn">Read Again</button></div>
+                                <div class="completed-badge">Completed</div>
+                            </div>
+                            <div class="book-info">
+                                <h3>Martial Peak</h3>
+                                <p>Chapter 6008 (End)</p>
+                            </div>
+                            <div class="progress-bar"><div class="progress" style="width:100%"></div></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- ===== VIEW: EXPLORE ===== -->
+            <div id="view-explore" class="view">
+                <section class="content-section">
+                    <div class="hero-banner">
+                        <img src="TDG.jpg" alt="Featured Book" class="hero-bg">
+                        <div class="hero-content">
+                            <span class="hero-badge">Editors' Choice</span>
+                            <h2 class="hero-title">Tales of Demons &amp; Gods</h2>
+                            <p class="hero-desc">Nie Li, the strongest Demon Spiritist in his past life, travels back in time. Armed with the knowledge of his previous life, he steps onto a new path to protect his loved ones and city!</p>
+                            <div class="hero-actions">
+                                <a href="#" class="read-btn" style="text-decoration:none;">Start Reading</a>
+                                <a href="#" class="btn-outline" style="text-decoration:none;"><i class="ph ph-plus"></i> Add to Library</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="category-pills">
+                        <span class="pill active">All</span>
+                        <span class="pill">Action</span>
+                        <span class="pill">Xianxia</span>
+                        <span class="pill">Wuxia</span>
+                        <span class="pill">System</span>
+                        <span class="pill">Romance</span>
+                        <span class="pill">Sci-Fi</span>
+                        <span class="pill">Mystery</span>
+                        <span class="pill">LitRPG</span>
+                    </div>
+
+                    <div class="section-header" style="margin-top:0;">
+                        <div style="display:flex;align-items:center;gap:12px;">
+                            <h2>Trending Recommendations</h2>
+                            <i class="ph ph-trend-up" style="font-size:1.5rem;color:var(--text-secondary);"></i>
+                        </div>
+                        <a href="#" class="view-all">See All</a>
+                    </div>
+
+                    <div class="books-grid">
+                        <div class="book-card">
+                            <div class="book-cover">
+                                <img src="A.jpg" alt="Apotheosis">
+                                <div class="book-overlay"><button class="read-btn">Add to Library</button></div>
+                            </div>
+                            <div class="book-info"><h3>Apotheosis</h3><p>Action &amp; Adventure</p></div>
+                        </div>
+                        <div class="book-card">
+                            <div class="book-cover">
+                                <img src="BTH.jpg" alt="Battle Through the Heavens">
+                                <div class="book-overlay"><button class="read-btn">Add to Library</button></div>
+                            </div>
+                            <div class="book-info"><h3>Battle Through the Heavens</h3><p>Fantasy &amp; Martial Arts</p></div>
+                        </div>
+                        <div class="book-card">
+                            <div class="book-cover">
+                                <img src="PW.jpg" alt="Perfect World">
+                                <div class="book-overlay"><button class="read-btn">Add to Library</button></div>
+                            </div>
+                            <div class="book-info"><h3>Perfect World</h3><p>Xianxia</p></div>
+                        </div>
+                        <div class="book-card">
+                            <div class="book-cover">
+                                <img src="RI.jpg" alt="Reverend Insanity">
+                                <div class="book-overlay"><button class="read-btn">Add to Library</button></div>
+                            </div>
+                            <div class="book-info"><h3>Reverend Insanity</h3><p>Dark Fantasy</p></div>
+                        </div>
+                        <div class="book-card">
+                            <div class="book-cover">
+                                <img src="SR.jpg" alt="Shadow Realm">
+                                <div class="book-overlay"><button class="read-btn">Add to Library</button></div>
+                            </div>
+                            <div class="book-info"><h3>Shadow Realm</h3><p>Mystery &amp; Magic</p></div>
+                        </div>
+                        <div class="book-card">
+                            <div class="book-cover">
+                                <img src="ST.jpeg" alt="Stellar Transformations">
+                                <div class="book-overlay"><button class="read-btn">Add to Library</button></div>
+                            </div>
+                            <div class="book-info"><h3>Stellar Transformations</h3><p>Wuxia</p></div>
+                        </div>
+                        <div class="book-card">
+                            <div class="book-cover">
+                                <img src="TDG.jpg" alt="Tales of Demons and Gods">
+                                <div class="book-overlay"><button class="read-btn">Add to Library</button></div>
+                            </div>
+                            <div class="book-info"><h3>Tales of Demons &amp; Gods</h3><p>Reincarnation &amp; Fantasy</p></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- ===== VIEW: BOOKMARKS ===== -->
+            <div id="view-bookmarks" class="view">
+                <section class="content-section" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:50vh;text-align:center;color:var(--text-secondary);">
+                    <i class="ph ph-bookmark-simple" style="font-size:4rem;opacity:0.4;margin-bottom:16px;"></i>
+                    <h2>No Bookmarks Yet</h2>
+                    <p>Save books to read them later.</p>
+                </section>
+            </div>
+
+            <!-- ===== VIEW: HISTORY ===== -->
+            <div id="view-history" class="view">
+                <section class="content-section" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:50vh;text-align:center;color:var(--text-secondary);">
+                    <i class="ph ph-clock-counter-clockwise" style="font-size:4rem;opacity:0.4;margin-bottom:16px;"></i>
+                    <h2>Reading History</h2>
+                    <p>Your recent reading activity will appear here.</p>
+                </section>
+            </div>
+
+            <!-- ===== VIEW: RANKINGS ===== -->
+            <div id="view-rankings" class="view">
+                <section class="content-section">
+                    <div class="section-header">
+                        <h2>Popular Rankings</h2>
+                        <div class="duration-tabs">
+                            <span class="tab">Day</span>
+                            <span class="tab active">Week</span>
+                            <span class="tab">Month</span>
+                            <span class="tab">All Time</span>
+                        </div>
+                    </div>
+                    <div class="ranking-list">
+                        <div class="ranking-item"><span class="rank-number">1</span><div class="ranking-info"><h4>Shadow Lord</h4><p>1.2M Reads</p></div><i class="ph ph-trend-up"></i></div>
+                        <div class="ranking-item"><span class="rank-number">2</span><div class="ranking-info"><h4>Tales of Demons &amp; Gods</h4><p>850K Reads</p></div><i class="ph ph-trend-up"></i></div>
+                        <div class="ranking-item"><span class="rank-number">3</span><div class="ranking-info"><h4>Perfect World</h4><p>720K Reads</p></div><i class="ph ph-trend-down text-danger"></i></div>
+                        <div class="ranking-item"><span class="rank-number">4</span><div class="ranking-info"><h4>Reverend Insanity</h4><p>610K Reads</p></div><i class="ph ph-minus text-muted"></i></div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- ===== VIEW: AUTHORS ===== -->
+            <div id="view-authors" class="view">
+                <section class="content-section">
+                    <div class="section-header">
+                        <h2>Most Known Authors</h2>
+                        <a href="#" class="view-all">View All</a>
+                    </div>
+                    <div class="authors-grid">
+                        <div class="author-card"><div class="author-avatar"><i class="ph ph-user"></i></div><h4>Gu Zhen Ren</h4><p>Reverend Insanity</p></div>
+                        <div class="author-card"><div class="author-avatar"><i class="ph ph-user"></i></div><h4>Mad Snail</h4><p>Tales of Demons &amp; Gods</p></div>
+                        <div class="author-card"><div class="author-avatar"><i class="ph ph-user"></i></div><h4>Chen Dong</h4><p>Perfect World</p></div>
+                        <div class="author-card"><div class="author-avatar"><i class="ph ph-user"></i></div><h4>Silkworm Potato</h4><p>Battle Through Heavens</p></div>
+                    </div>
+                </section>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Account Modal -->
+    <div id="accountModal" class="modal-overlay">
+        <div class="modal-content">
+            <a href="#" class="close-btn" style="text-decoration:none;">&times;</a>
+            <h2>Create Account</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="usernameInput" style="display:none;">Username</label>
+                    <input type="text" id="usernameInput" placeholder="Username" required>
+                </div>
+                <div class="form-group">
+                    <label for="emailInput" style="display:none;">Email</label>
+                    <input type="email" id="emailInput" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <label for="passwordInput" style="display:none;">Password</label>
+                    <input type="password" id="passwordInput" placeholder="Password" required>
+                </div>
+                <a href="#" class="btn-primary" style="display:block;text-align:center;text-decoration:none;">Register</a>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

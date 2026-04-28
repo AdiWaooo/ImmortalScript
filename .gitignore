@@ -1,0 +1,10 @@
+# Exclude large EPUB book files
+Martial Peak Full/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+*.code-workspace
